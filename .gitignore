@@ -1,0 +1,14 @@
+dist/
+deploy_versions/
+.temp/
+.rn_temp/
+node_modules/
+.DS_Store
+.vscode
+.eslintcache
+
+yarn-error.log
+package-lock.json
+project.config.json
+coverage
+
