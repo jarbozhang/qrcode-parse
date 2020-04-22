@@ -12,3 +12,5 @@ package-lock.json
 project.config.json
 coverage
 
+
+.now

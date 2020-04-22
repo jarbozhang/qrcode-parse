@@ -1,4 +1,4 @@
-const puppeteer = require('puppeteer');
+//const puppeteer = require('puppeteer');
 const jsqr = require('jsqr');
 const nodeFetch = require('node-fetch');
 const Jimp = require('jimp');
@@ -15,7 +15,7 @@ app.get("/", async (req, res) => {
   const url = await req.query.url && loadImage(req.query.url) || ''
   console.log({url})
   if(!req.query.url) {
-    res.send("您可以直接把参数写到链接中例如：http://localhost:5000/?url=https://i.loli.net/2020/04/21/XAFucsbkLronES6.png");
+    res.send("您可以直接把参数写到链接中例如：https://qrcode-parse.jarbozhang.now.sh/?url=https://i.loli.net/2020/04/21/XAFucsbkLronES6.png");
   } else {
     res.send(`对链接:${req.query.url}的解析结果为:${url}`)
   }
@@ -29,8 +29,8 @@ Visit http://localhost:5000`);
 
 
 const loadImage = async (url) => {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
+  //const browser = await puppeteer.launch();
+  //const page = await browser.newPage();
   const redirect = await nodeFetch(url)
   .then(res => res.buffer())
   .then(buffer => Jimp.read(buffer))
@@ -38,7 +38,7 @@ const loadImage = async (url) => {
     const data = new Uint8Array(image.bitmap.data)
     return jsqr(data, image.bitmap.width, image.bitmap.height).data
   })
-  await page.goto(redirect);
+  /*await page.goto(redirect);
   try{
   const color = await page.$eval('.qrcode__main__container__status-text', e=>e.innerHTML)
   console.log({color})
@@ -48,5 +48,6 @@ const loadImage = async (url) => {
   await page.screenshot({path: 'example.png'});
 
   await browser.close();
+  */
   return redirect
 }
