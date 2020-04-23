@@ -9,3 +9,11 @@ node.js application with jsqr and jimp module
 ### 项目解决的问题
 网上对上个段落提到的几个库合作实现的项目介绍非常的简略以至于调试起来比较花时间，最开始我使用pngjs来对node-fetch到的图片解析，这部分源码存在于pngjs.js文件中。
 但是pngjs对jpg格式的文件又不支持，我转而使用了jimp这个图片处理工具来生成jsQr支持的图片格式，具体的代码请参考index.js，希望您如果搜索到本文档对您会有所帮助。
+
+### 项目demo
+项目已经部署到zeit上，可访问：https://qrcode-parse.jarbozhang.now.sh/
+由于zeit没办法部署puppeteer，使用了puppeteer和chrome-aws-lambda的组合实现，可能遇到10秒超时500错误，请刷新重试
+本地请直接运行node local.js利用puppeteer来完成操作。
+
+### 后续
+由于jsqr对有颜色的二维码识别不出来，后续需要考虑要么在识别之前做下转换，要么尝试一下zxing对应的js版本。
