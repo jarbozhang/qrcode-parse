@@ -1,5 +1,4 @@
-const puppeteer = require('puppeteer-core');
-const chrome = require('chrome-aws-lambda');
+const puppeteer = require('puppeteer');
 const jsqr = require('jsqr');
 const nodeFetch = require('node-fetch');
 const Jimp = require('jimp');
@@ -17,8 +16,11 @@ app.get("/", async (req, res) => {
     res.send("您可以直接把参数写到链接中例如：https://qrcode-parse.jarbozhang.now.sh/?url=https://i.loli.net/2020/04/21/XAFucsbkLronES6.png");
     return
   } else {
+    //res.send(req.query.url)
     loadImage(req.query.url).then(url => {
-      res.send(`对链接:${req.query.url}的解析结果为:${url}`)
+      console.log(url)
+      res.send(url)
+      //res.send(`对链接:${req.query.url}的解析结果为:${url}`)
     })
   }
 })
@@ -31,17 +33,14 @@ Visit http://localhost:5000`);
 
 
 const loadImage = async (url) => {
-  const browser = await puppeteer.launch({
-    args: chrome.args,
-    executablePath: await chrome.executablePath,
-    headless: chrome.headless,
-  });
+  const browser = await puppeteer.launch();
   const redirect = await nodeFetch(url)
   .then(res => res.buffer())
   .then(buffer => Jimp.read(buffer))
   .then(image => {
     const data = new Uint8Array(image.bitmap.data)
-    return jsqr(data, image.bitmap.width, image.bitmap.height).data
+    console.log(data, image.bitmap.width, image.bitmap.height)
+    return jsqr(image.bitmap.data, image.bitmap.width, image.bitmap.height).data
   })
   const page = await browser.newPage()
   await page.goto(redirect);
