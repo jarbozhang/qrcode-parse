@@ -7,11 +7,13 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "chrome-aws-lambda": "^2.1.1",
     "express": "^4.17.1",
     "jimp": "^0.10.3",
     "jsqr": "^1.2.0",
     "node-fetch": "^2.6.0",
     "pngjs": "^5.0.0",
-    "puppeteer": "^3.0.0"
+    "puppeteer": "^3.0.0",
+    "puppeteer-core": "^3.0.1"
   }
 }
