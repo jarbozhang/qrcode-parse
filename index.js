@@ -12,12 +12,13 @@ const port = 5000;
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/", async (req, res) => {
-  const url = await req.query.url && loadImage(req.query.url) || ''
-  console.log({url})
   if(!req.query.url) {
     res.send("您可以直接把参数写到链接中例如：https://qrcode-parse.jarbozhang.now.sh/?url=https://i.loli.net/2020/04/21/XAFucsbkLronES6.png");
+    return
   } else {
-    res.send(`对链接:${req.query.url}的解析结果为:${url}`)
+    loadImage(req.query.url).then(url => {
+      res.send(`对链接:${req.query.url}的解析结果为:${url}`)
+    })
   }
 })
 
@@ -29,6 +30,7 @@ Visit http://localhost:5000`);
 
 
 const loadImage = async (url) => {
+  //const browser = await puppeteer.launch();
   //const browser = await puppeteer.launch();
   //const page = await browser.newPage();
   const redirect = await nodeFetch(url)
