@@ -12,7 +12,7 @@ node.js application with jsqr and jimp module
 
 ### 项目demo
 项目已经部署到zeit上，可访问：https://qrcode-parse.jarbozhang.now.sh/
-由于zeit没办法部署puppeteer，使用了puppeteer和chrome-aws-lambda的组合实现，可能遇到10秒超时500错误，请刷新重试
+由于zeit没办法部署puppeteer，使用了puppeteer-core和chrome-aws-lambda的组合实现，可能遇到10秒超时500错误，请刷新重试
 本地请直接运行node local.js利用puppeteer来完成操作。
 
 ### 后续
